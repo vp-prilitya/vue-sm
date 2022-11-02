@@ -1,26 +1,28 @@
 <template>
   <div>
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center md:pr-8">
       <h1 class="text-xl text-primary font-bold">Device Group</h1>
       <div class="flex space-x-3">
         <icon-search />
         <icon-file-add />
       </div>
     </div>
-    <div class="py-5 space-y-5">
-      <CardDeviceGroup
-        title="All Device"
-        count="40"
-        description="Show All Device"
-        :updateDetail="false"
-      />
-      <CardDeviceGroup
-        v-for="index in 3"
-        :key="index"
-        title="KRL-JR105"
-        count="2"
-        description="Device group untuk KRL-JR105"
-      />
+    <div class="overflow-y-auto h-128">
+      <div class="py-5 space-y-5 md:pr-8">
+        <CardDeviceGroup
+          title="All Device"
+          count="40"
+          description="Show All Device"
+          :updateDetail="false"
+        />
+        <CardDeviceGroup
+          v-for="index in 10"
+          :key="index"
+          title="KRL-JR105"
+          count="2"
+          description="Device group untuk KRL-JR105"
+        />
+      </div>
     </div>
   </div>
 </template>

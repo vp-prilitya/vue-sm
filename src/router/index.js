@@ -2,8 +2,14 @@ import { createRouter, createWebHistory } from "vue-router";
 import PlaylistView from "../views/playlist/PlaylistView.vue";
 import DeviceView from "../views/device/DeviceView.vue";
 import AppLayoutAdmin from "../layouts/AppLayoutAdmin.vue";
+import LoginView from "../views/login/LoginView.vue";
 
 const routes = [
+  {
+    path: "/login",
+    name: "login",
+    component: LoginView,
+  },
   {
     path: "/",
     name: "AppLayout",

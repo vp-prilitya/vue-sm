@@ -4,7 +4,7 @@
   </header-title>
   <main-content>
     <div class="flex flex-col md:flex-row">
-      <div class="basis-7/12 md:border-r-2 md:border-gray-300 md:pr-8">
+      <div class="basis-7/12 md:border-r-2 md:border-gray-300">
         <device-group-list />
       </div>
 

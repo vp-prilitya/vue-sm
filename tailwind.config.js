@@ -12,9 +12,14 @@ module.exports = {
       amber: "#FFA400",
       amber500: "#f59e0b",
       amber400: "#fbbf24",
+      blueSide: "#073265",
     },
 
-    extend: {},
+    extend: {
+      height: {
+        128: "32rem",
+      },
+    },
   },
   plugins: [require("flowbite/plugin")],
 };
