@@ -1,11 +1,7 @@
 <template>
   <div @click="onClick" class="cursor-pointer">
     <CardComponent :scale="true">
-      <title-sub-icon
-        title="PL-Ads Blocking"
-        subtitle="PL-Ads Blocking Playlist bloking untuk slot kedatangan dan
-            keberangkatan"
-      >
+      <title-sub-icon :title="playlistname" :subtitle="description">
         <IconLibaryMusic color="fill-primary" />
       </title-sub-icon>
 
@@ -15,11 +11,11 @@
       <div class="space-y-4">
         <div class="flex items-center space-x-3">
           <icon-play />
-          <h3 class="text-md text-primary">5 Media's</h3>
+          <h3 class="text-md text-primary">{{ totalMedia }} Media's</h3>
         </div>
         <div class="flex items-center space-x-3">
           <icon-alarm />
-          <h3 class="text-md text-primary">03:20</h3>
+          <h3 class="text-md text-primary">{{ totalTime }}</h3>
         </div>
         <div class="flex items-center space-x-3">
           <icon-date />
@@ -48,11 +44,20 @@ export default {
     IconAlarm,
     TitleSubIcon,
   },
+  props: {
+    playlistname: String,
+    description: String,
+    totalMedia: String,
+    totalTime: String,
+  },
   setup() {
     const open = useSidebarStore();
     const onClick = () => {
       open.$patch((state) => {
-        state.open = !state.open;
+        if (!state.open) {
+          console.log(state);
+          state.open = !state.open;
+        }
       });
     };
     return {

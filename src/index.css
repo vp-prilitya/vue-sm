@@ -5,3 +5,7 @@
 .main {
   @apply w-full px-12;
 }
+
+.width-sidebar {
+  @apply w-[341px];
+}
