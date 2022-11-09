@@ -1,23 +1,28 @@
 <template>
-  <header-title title="Playlist">
-    <icon-playlist color="fill-primary" />
-  </header-title>
-  <main-content>
-    <div class="flex-wrap flex flex-col sm:flex-row justify-center mx-auto">
-      <card-icon title="Arrival">
-        <IconArrival />
-      </card-icon>
-      <card-icon title="Center">
-        <CenterIcon />
-      </card-icon>
-      <card-icon title="Departurer">
-        <DepartureIcon />
-      </card-icon>
+  <div class="flex">
+    <div class="main">
+      <header-title title="Playlist">
+        <icon-playlist color="fill-primary" />
+      </header-title>
+      <main-content>
+        <div class="flex-wrap flex flex-col sm:flex-row justify-center mx-auto">
+          <card-icon title="Arrival">
+            <IconArrival />
+          </card-icon>
+          <card-icon title="Center">
+            <CenterIcon />
+          </card-icon>
+          <card-icon title="Departurer">
+            <DepartureIcon />
+          </card-icon>
+        </div>
+        <div class="pt-5 flex flex-wrap">
+          <card-playlist />
+        </div>
+      </main-content>
     </div>
-    <div class="pt-5 flex flex-wrap">
-      <card-playlist />
-    </div>
-  </main-content>
+    <media-playlist></media-playlist>
+  </div>
 </template>
 
 <script>
@@ -29,6 +34,7 @@ import CenterIcon from "@/components/icons/CenterIcon.vue";
 import DepartureIcon from "@/components/icons/DepartureIcon.vue";
 import CardPlaylist from "./CardPlaylist.vue";
 import IconPlaylist from "@/components/icons/IconPlaylist.vue";
+import MediaPlaylist from "./MediaPlaylist.vue";
 
 export default {
   name: "PlaylistView",
@@ -41,6 +47,7 @@ export default {
     DepartureIcon,
     CardPlaylist,
     IconPlaylist,
+    MediaPlaylist,
   },
 };
 </script>

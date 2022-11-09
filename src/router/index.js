@@ -3,6 +3,7 @@ import PlaylistView from "../views/playlist/PlaylistView.vue";
 import DeviceView from "../views/device/DeviceView.vue";
 import AppLayoutAdmin from "../layouts/AppLayoutAdmin.vue";
 import LoginView from "../views/login/LoginView.vue";
+import { useAuthStore, useAlertStore } from "@/store";
 
 const routes = [
   {
@@ -33,6 +34,22 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from) => {
+  const alertStore = useAlertStore();
+  alertStore.clear();
+
+  const publicPages = ["/login"];
+  const authRequired = !publicPages.includes(to.path);
+  const authStore = useAuthStore();
+
+  if (authRequired && !authStore.user) {
+    authStore.returnUrl = to.fullPath;
+    return "/login";
+  } else if (to.name === "login" && authStore.user) {
+    return from.fullPath;
+  }
 });
 
 export default router;

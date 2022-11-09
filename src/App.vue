@@ -1,9 +1,16 @@
 <template>
-  <div class="flex h-screen antialiased text-gray-900 bg-gray-100">
+  <div class="flex h-screen antialiased text-gray-900 bg-contentColor">
     <router-view />
   </div>
+  <error-message />
 </template>
 
 <script>
-export default {};
+import ErrorMessage from "@/components/ErrorMessage.vue";
+
+export default {
+  components: {
+    ErrorMessage,
+  },
+};
 </script>

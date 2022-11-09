@@ -1,18 +1,20 @@
 <template>
-  <header-title title="Device">
-    <icon-device color="fill-primary" />
-  </header-title>
-  <main-content>
-    <div class="flex flex-col md:flex-row">
-      <div class="basis-7/12 md:border-r-2 md:border-gray-300">
-        <device-group-list />
-      </div>
+  <div class="main">
+    <header-title title="Device">
+      <icon-device color="fill-primary" />
+    </header-title>
+    <main-content>
+      <div class="flex flex-col md:flex-row">
+        <div class="basis-7/12 md:border-r-2 md:border-gray-300">
+          <device-group-list />
+        </div>
 
-      <div class="basis-full md:pl-8">
-        <DeviceList />
+        <div class="basis-full md:pl-8">
+          <DeviceList />
+        </div>
       </div>
-    </div>
-  </main-content>
+    </main-content>
+  </div>
 </template>
 
 <script>
@@ -30,5 +32,6 @@ export default {
     IconDevice,
     DeviceList,
   },
+  setup() {},
 };
 </script>

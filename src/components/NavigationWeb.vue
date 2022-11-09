@@ -44,8 +44,9 @@
         </a>
       </div>
       <div class="flex items-center justify-center flex-shrink-0">
-        <!-- Logout button -->
-        <button
+        <a
+          href="#"
+          @click="authStore.logout()"
           class="p-2 text-indigo-400 transition-colors duration-200 rounded-md bg-indigo-50 hover:text-indigo-600 hover:bg-indigo-100 focus:outline-none focus:bg-indigo-100 focus:ring-indigo-800"
         >
           <span class="sr-only">Logout</span>
@@ -63,7 +64,7 @@
               d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
             />
           </svg>
-        </button>
+        </a>
       </div>
     </nav>
   </aside>
@@ -73,6 +74,7 @@
 import NavigationLink from "@/components/NavigationLink.vue";
 import IconPlaylist from "@/components/icons/IconPlaylist.vue";
 import IconDevice from "@/components/icons/IconDevice.vue";
+import { useAuthStore } from "@/store";
 
 export default {
   name: "NavigationWeb",
@@ -82,7 +84,10 @@ export default {
     IconDevice,
   },
   setup() {
-    return {};
+    const authStore = useAuthStore();
+    return {
+      authStore,
+    };
   },
 };
 </script>

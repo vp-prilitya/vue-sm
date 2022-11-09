@@ -13,6 +13,8 @@ module.exports = {
       amber500: "#f59e0b",
       amber400: "#fbbf24",
       blueSide: "#073265",
+      cardColor: "#F6F6F6",
+      contentColor: "#E7E7E9",
     },
 
     extend: {

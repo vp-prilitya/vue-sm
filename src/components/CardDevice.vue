@@ -1,14 +1,14 @@
 <template>
-  <card-component>
-    <h1 class="text-xl text-end text-primary font-bold">GA-A1</h1>
+  <card-component :scale="true" addClass="cursor-pointer">
+    <h1 class="text-xl text-end text-primary font-bold">{{ deviceid }}</h1>
     <div class="grid grid-cols-2 pt-3 gap-4">
       <div class="flex space-x-3">
         <icon-group-device size="w-5 h-5" />
-        <h3 class="text-sm text-primary text-gray-400">KRL-JR105</h3>
+        <h3 class="text-sm text-primary text-gray-400">{{ groupname }}</h3>
       </div>
       <div class="flex space-x-3">
         <icon-version />
-        <h3 class="text-sm text-primary text-gray-400">v1.1.0</h3>
+        <h3 class="text-sm text-primary text-gray-400">{{ firmware }}</h3>
       </div>
       <div class="flex space-x-3">
         <icon-audio />
@@ -20,7 +20,7 @@
       </div>
       <div class="flex space-x-3">
         <icon-memory />
-        <h3 class="text-sm text-primary text-gray-400">32GB</h3>
+        <h3 class="text-sm text-primary text-gray-400">{{ hdcapacity }}</h3>
       </div>
       <div class="flex space-x-3">
         <icon-device-information />
@@ -49,6 +49,12 @@ export default {
     IconVersion,
     IconModel,
     IconMemory,
+  },
+  props: {
+    deviceid: String,
+    groupname: String,
+    firmware: String,
+    hdcapacity: Number,
   },
   setup() {
     return {};

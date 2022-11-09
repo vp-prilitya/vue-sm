@@ -1,18 +1,14 @@
 <template>
   <div @click="onClick" class="cursor-pointer">
-    <CardComponent>
-      <div class="flex items-center">
-        <div>
-          <IconLibaryMusic />
-        </div>
-        <div class="pl-6">
-          <h1 class="text-1xl text-primary font-bold">PL-Ads Blocking</h1>
-          <p class="text-xs text-gray-400">
-            PL-Ads Blocking Playlist bloking untuk slot kedatangan dan
-            keberangkatan
-          </p>
-        </div>
-      </div>
+    <CardComponent :scale="true">
+      <title-sub-icon
+        title="PL-Ads Blocking"
+        subtitle="PL-Ads Blocking Playlist bloking untuk slot kedatangan dan
+            keberangkatan"
+      >
+        <IconLibaryMusic color="fill-primary" />
+      </title-sub-icon>
+
       <div class="py-4">
         <hr />
       </div>
@@ -40,6 +36,7 @@ import IconLibaryMusic from "@/components/icons/IconLibaryMusic.vue";
 import IconPlay from "@/components/icons/IconPlay.vue";
 import IconDate from "@/components/icons/IconDate.vue";
 import IconAlarm from "@/components/icons/IconAlarm.vue";
+import TitleSubIcon from "@/components/TitleSubIcon.vue";
 import { useSidebarStore } from "@/store";
 
 export default {
@@ -49,10 +46,10 @@ export default {
     IconPlay,
     IconDate,
     IconAlarm,
+    TitleSubIcon,
   },
   setup() {
     const open = useSidebarStore();
-
     const onClick = () => {
       open.$patch((state) => {
         state.open = !state.open;
