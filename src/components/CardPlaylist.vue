@@ -1,5 +1,5 @@
 <template>
-  <div @click="onClick" class="cursor-pointer">
+  <div class="cursor-pointer">
     <CardComponent :scale="true">
       <title-sub-icon :title="playlistname" :subtitle="description">
         <IconLibaryMusic color="fill-primary" />
@@ -33,7 +33,6 @@ import IconPlay from "@/components/icons/IconPlay.vue";
 import IconDate from "@/components/icons/IconDate.vue";
 import IconAlarm from "@/components/icons/IconAlarm.vue";
 import TitleSubIcon from "@/components/TitleSubIcon.vue";
-import { useSidebarStore } from "@/store";
 
 export default {
   components: {
@@ -49,20 +48,6 @@ export default {
     description: String,
     totalMedia: String,
     totalTime: String,
-  },
-  setup() {
-    const open = useSidebarStore();
-    const onClick = () => {
-      open.$patch((state) => {
-        if (!state.open) {
-          console.log(state);
-          state.open = !state.open;
-        }
-      });
-    };
-    return {
-      onClick,
-    };
   },
 };
 </script>

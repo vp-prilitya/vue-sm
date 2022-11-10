@@ -20,6 +20,7 @@
           <card-playlist
             v-show="result.data?.length"
             v-for="db in result.data"
+            @click="onClick(db)"
             :key="db.playlistid"
             :playlistname="db.playlistname"
             :description="db.description"
@@ -57,7 +58,11 @@ import CardPlaylist from "../../components/CardPlaylist.vue";
 import IconPlaylist from "@/components/icons/IconPlaylist.vue";
 import MediaPlaylist from "./MediaPlaylist.vue";
 import AlertErrorComponent from "@/components/AlertErrorComponent.vue";
-import { usePlaylistStore } from "@/store";
+import {
+  usePlaylistDetailStore,
+  usePlaylistStore,
+  useSidebarStore,
+} from "@/store";
 import { storeToRefs } from "pinia";
 import { onMounted } from "@vue/runtime-core";
 
@@ -78,12 +83,29 @@ export default {
   },
   setup() {
     const playlistStore = usePlaylistStore();
+    const detail = usePlaylistDetailStore();
+    const open = useSidebarStore();
+
+    const onClick = (value) => {
+      open.$patch((state) => {
+        if (!state.open) {
+          state.open = !state.open;
+        }
+
+        if (state.id != value.playlistid) {
+          detail.playlistDetailGetAll({ playlistid: value.playlistid });
+          state.id = value.playlistid;
+          state.data = value;
+        }
+      });
+    };
 
     const { result } = storeToRefs(playlistStore);
 
     onMounted(() => playlistStore.playlistGetAll());
 
     return {
+      onClick,
       result,
     };
   },

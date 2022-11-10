@@ -1,8 +1,8 @@
 <template>
   <div
     role="status"
-    class="flex justify-center items-center max-w-sm h- bg-gray-300 rounded-lg animate-pulse"
-    :class="[height]"
+    class="flex justify-center items-center h- rounded-lg animate-pulse"
+    :class="[height, width, color]"
   >
     <span class="sr-only">Loading...</span>
   </div>
@@ -14,6 +14,14 @@ export default {
     height: {
       type: String,
       default: "h-32",
+    },
+    width: {
+      type: String,
+      default: "max-w-sm",
+    },
+    color: {
+      type: String,
+      default: "bg-gray-300",
     },
   },
 };

@@ -1,52 +1,59 @@
 <template>
   <sidebar-right>
     <div class="fixed flex-row width-sidebar h-full pb-8 pt-12">
-      <div class="px-8">
-        <title-sub-icon
-          title="PL-Ads Blocking"
-          titleColor="text-white"
-          subtitleColor="text-white"
-          subtitle="20-10-2022 to 23-10-2022"
-        >
-          <icon-libary-music />
-        </title-sub-icon>
-
-        <tittle-betweent title="Media List" addClass="pt-8 pb-4">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="white" />
-          </svg>
-        </tittle-betweent>
-      </div>
-      <div class="overflow-y-auto h-80">
-        <div class="px-8 space-y-4">
+      <div v-if="result.data?.length">
+        <div class="px-8">
           <title-sub-icon
-            title="PL-Ads Blocking"
+            :title="dataPlaylist.playlistname"
             titleColor="text-white"
             subtitleColor="text-white"
-            subtitle="Aqua"
-            subtitle2="Commersial"
-            subtitle3="00:30"
-            v-for="index in 10"
-            :key="index"
+            :subtitle="dataPlaylist.description"
           >
-            <icon-play color="fill-white" />
+            <icon-libary-music />
           </title-sub-icon>
+
+          <tittle-betweent title="Media List" addClass="pt-8 pb-4">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="white" />
+            </svg>
+          </tittle-betweent>
+        </div>
+        <div class="overflow-y-auto h-80">
+          <div class="px-8 space-y-4">
+            <title-sub-icon
+              v-for="db in result.data"
+              :key="db.playlist_detail_id"
+              :title="db.media.name"
+              titleColor="text-white"
+              subtitleColor="text-white"
+              :subtitle="db.media.vendor.name"
+              :subtitle2="db.media.adstype.name"
+              :subtitle3="secondToString(db.media.duration_insecond)"
+            >
+              <icon-play color="fill-white" />
+            </title-sub-icon>
+          </div>
+        </div>
+        <div class="px-8">
+          <tittle-betweent title="Total media" addClass="pt-8">
+            <h1 class="text-white text-md font-bold">
+              {{ dataPlaylist.total_media }}
+            </h1>
+          </tittle-betweent>
+          <tittle-betweent title="Total duration" addClass="pt-3">
+            <h1 class="text-white text-md font-bold">
+              {{ dataPlaylist.total_time }}
+            </h1>
+          </tittle-betweent>
         </div>
       </div>
-      <div class="px-8">
-        <tittle-betweent title="Total media" addClass="pt-8">
-          <h1 class="text-white text-md font-bold">5</h1>
-        </tittle-betweent>
-        <tittle-betweent title="Total duration" addClass="pt-3">
-          <h1 class="text-white text-md font-bold">01:24</h1>
-        </tittle-betweent>
-      </div>
+      <media-playlist-skeleton v-if="result.loading" />
     </div>
   </sidebar-right>
 </template>
@@ -56,7 +63,12 @@ import SidebarRight from "@/components/SidebarRight.vue";
 import TitleSubIcon from "@/components/TitleSubIcon.vue";
 import TittleBetweent from "@/components/TittleBetween.vue";
 import IconLibaryMusic from "@/components/icons/IconLibaryMusic.vue";
+import MediaPlaylistSkeleton from "./MediaPlayistSkeleton.vue";
 import IconPlay from "@/components/icons/IconPlay.vue";
+import { usePlaylistDetailStore, useSidebarStore } from "@/store";
+import { storeToRefs } from "pinia";
+import { secondToString } from "@/utils/helper";
+import { computed } from "@vue/runtime-core";
 
 export default {
   components: {
@@ -65,9 +77,20 @@ export default {
     IconLibaryMusic,
     TittleBetweent,
     IconPlay,
+    MediaPlaylistSkeleton,
   },
   setup() {
-    return {};
+    const detailStore = usePlaylistDetailStore();
+    const sidebar = useSidebarStore();
+    const dataPlaylist = computed(() => sidebar.getData);
+
+    const { result } = storeToRefs(detailStore);
+
+    return {
+      secondToString,
+      result,
+      dataPlaylist,
+    };
   },
 };
 </script>

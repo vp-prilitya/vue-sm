@@ -5,3 +5,4 @@ export * from "./deviceGroup.store";
 export * from "./error.store";
 export * from "./device.store";
 export * from "./playlist.store";
+export * from "./playlistDetail.store";
