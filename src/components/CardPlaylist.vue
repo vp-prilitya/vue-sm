@@ -11,15 +11,15 @@
       <div class="space-y-4">
         <div class="flex items-center space-x-3">
           <icon-play />
-          <h3 class="text-md text-primary">{{ totalMedia }} Media's</h3>
+          <h3 class="text-sm text-primary">{{ totalMedia }} Media's</h3>
         </div>
         <div class="flex items-center space-x-3">
           <icon-alarm />
-          <h3 class="text-md text-primary">{{ totalTime }}</h3>
+          <h3 class="text-sm text-primary">{{ totalTime }}</h3>
         </div>
         <div class="flex items-center space-x-3">
           <icon-date />
-          <h3 class="text-md text-primary">20-10-2022 to 23-10-2022</h3>
+          <h3 class="text-sm text-primary">20-10-2022 to 23-10-2022</h3>
         </div>
       </div>
     </CardComponent>

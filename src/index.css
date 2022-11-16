@@ -9,3 +9,7 @@
 .width-sidebar {
   @apply w-[341px];
 }
+
+.btn-gray {
+  @apply bg-btnGray hover:bg-gray-300 focus:ring-gray-300;
+}

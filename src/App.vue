@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen antialiased text-gray-900 bg-contentColor">
+  <div class="flex text h-screen antialiased text-gray-900 bg-contentColor">
     <router-view />
   </div>
   <error-message />

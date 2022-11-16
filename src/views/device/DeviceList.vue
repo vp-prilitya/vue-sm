@@ -10,6 +10,7 @@
         :groupname="db.devicegroupname"
         :firmware="db.firmware"
         :hdcapacity="db.hdcapacity"
+        @click="viewDetail(db.deviceid)"
       />
 
       <device-list-skeleton v-if="result.loading" />
@@ -29,6 +30,7 @@ import AlertErrorComponent from "@/components/AlertErrorComponent.vue";
 import { useDeviceStore } from "@/store";
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
+import router from "@/router";
 
 export default {
   components: {
@@ -42,10 +44,17 @@ export default {
 
     const { result } = storeToRefs(deviceStore);
 
-    onMounted(() => deviceStore.deviceGetAll());
+    onMounted(() => {
+      deviceStore.deviceGetAll();
+    });
+
+    const viewDetail = (deviceid) => {
+      router.push(`/device/${deviceid}`);
+    };
 
     return {
       result,
+      viewDetail,
     };
   },
 };

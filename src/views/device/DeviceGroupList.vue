@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-between items-center md:pr-8">
+    <div class="flex justify-between items-center md:pr-8 pb-5">
       <h1 class="text-xl text-primary font-bold">Device Group</h1>
       <div class="flex space-x-3">
         <icon-search />
@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="overflow-y-auto h-128">
-      <div class="py-5 md:pr-8">
+      <div class="md:pr-8">
         <div v-if="result.data?.length" class="space-y-5">
           <CardDeviceGroup
             title="All Device"
@@ -79,7 +79,9 @@ export default {
       deviceStore.deviceGetAll({ q: value == "all" ? "" : value });
     };
 
-    onMounted(() => deviceGroupStore.groupDeviceGetAll());
+    onMounted(() => {
+      deviceGroupStore.groupDeviceGetAll();
+    });
 
     return {
       result,

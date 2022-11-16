@@ -1,9 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
-import PlaylistView from "../views/playlist/PlaylistView.vue";
-import DeviceView from "../views/device/DeviceView.vue";
 import AppLayoutAdmin from "../layouts/AppLayoutAdmin.vue";
 import LoginView from "../views/login/LoginView.vue";
-import { useAuthStore, useAlertStore } from "@/store";
+import PlaylistView from "../views/playlist/PlaylistView.vue";
+import DeviceView from "../views/device/DeviceView.vue";
+import DeviceDetail from "../views/deviceDetail/DeviceDetail.vue";
+import SlotView from "../views/slot/SlotView.vue";
+import SlotArrival from "../views/slot/SlotArrival.vue";
+import SlotDeparture from "../views/slot/SlotDeparture.vue";
+import SlotInformationSvg from "@/components/SlotInformationSvg.vue";
+import { useAuthStore, useAlertStore, useSidebarStore } from "@/store";
 
 const routes = [
   {
@@ -25,7 +30,41 @@ const routes = [
       {
         path: "/device",
         name: "device",
-        component: DeviceView,
+        children: [
+          {
+            path: "",
+            name: "device",
+            component: DeviceView,
+          },
+          {
+            path: ":id",
+            name: "device-detail",
+            component: DeviceDetail,
+          },
+        ],
+      },
+      {
+        path: "/slot",
+        name: "slot",
+        component: SlotView,
+        redirect: "/slot",
+        children: [
+          {
+            path: "",
+            name: "default",
+            component: SlotInformationSvg,
+          },
+          {
+            path: "arrival",
+            name: "slot-arrival",
+            component: SlotArrival,
+          },
+          {
+            path: "departure",
+            name: "slot-departure",
+            component: SlotDeparture,
+          },
+        ],
       },
     ],
   },
@@ -38,7 +77,10 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
   const alertStore = useAlertStore();
+  const sidebarStore = useSidebarStore();
+
   alertStore.clear();
+  sidebarStore.$reset();
 
   const publicPages = ["/login"];
   const authRequired = !publicPages.includes(to.path);

@@ -1,10 +1,8 @@
 <template>
   <svg
-    width="30"
-    height="30"
     viewBox="0 0 30 30"
     fill="none"
-    :class="[color]"
+    :class="[color, size]"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
@@ -19,6 +17,10 @@ export default {
     color: {
       type: String,
       default: "fill-primary",
+    },
+    size: {
+      type: String,
+      default: "w-6 h-6",
     },
   },
 };

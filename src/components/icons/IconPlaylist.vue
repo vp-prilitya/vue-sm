@@ -1,6 +1,6 @@
 <template>
   <svg
-    :class="[color, size]"
+    :class="[color, size, addClass]"
     viewBox="0 0 35 26"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -23,6 +23,7 @@ export default {
       type: String,
       default: "w-7 h-7",
     },
+    addClass: String,
   },
 };
 </script>

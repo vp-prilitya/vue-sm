@@ -5,18 +5,15 @@
         <icon-playlist color="fill-primary" />
       </header-title>
       <main-content>
-        <div class="flex-wrap flex flex-col sm:flex-row justify-center mx-auto">
-          <card-icon title="Arrival">
-            <IconArrival />
-          </card-icon>
-          <card-icon title="Center">
-            <CenterIcon />
-          </card-icon>
-          <card-icon title="Departurer">
-            <DepartureIcon />
-          </card-icon>
-        </div>
-        <div class="pt-5 grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-5 pb-5">
+        <menu-componet
+          :arrivalLink="'slot'"
+          :centerLink="'slot'"
+          :departurerLink="'slot'"
+        />
+        <div
+          class="pt-5 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 pb-5"
+          :class="open ? 'lg:grid-cols-2' : 'lg:grid-cols-3 '"
+        >
           <card-playlist
             v-show="result.data?.length"
             v-for="db in result.data"
@@ -40,6 +37,14 @@
             :message="result.error.response.data.message"
           />
         </div>
+        <!-- <div v-show="result.data?.length" class="flex justify-center p-8">
+          <button-component
+            @click="loadMore"
+            :vClass="'w-[200px] bg-btnGray hover:bg-gray-300 rounded-full focus:ring-gray-300 '"
+          >
+            Load more
+          </button-component>
+        </div> -->
       </main-content>
     </div>
     <media-playlist></media-playlist>
@@ -49,45 +54,43 @@
 <script>
 import HeaderTitle from "@/components/HeaderTitle.vue";
 import MainContent from "@/components/MainContent.vue";
-import IconArrival from "@/components/icons/IconArrival.vue";
-import CardIcon from "@/components/CardIcon.vue";
-import CenterIcon from "@/components/icons/CenterIcon.vue";
-import DepartureIcon from "@/components/icons/DepartureIcon.vue";
 import SkeletonComponent from "@/components/SkeletonComponent.vue";
+import MenuComponet from "@/components/MenuComponent.vue";
 import CardPlaylist from "../../components/CardPlaylist.vue";
 import IconPlaylist from "@/components/icons/IconPlaylist.vue";
 import MediaPlaylist from "./MediaPlaylist.vue";
 import AlertErrorComponent from "@/components/AlertErrorComponent.vue";
+// import ButtonComponent from "@/components/ButtonComponent.vue";
 import {
   usePlaylistDetailStore,
   usePlaylistStore,
   useSidebarStore,
 } from "@/store";
 import { storeToRefs } from "pinia";
-import { onMounted } from "@vue/runtime-core";
+import { onMounted, ref } from "@vue/runtime-core";
 
 export default {
   name: "PlaylistView",
   components: {
     HeaderTitle,
     MainContent,
-    IconArrival,
-    CardIcon,
-    CenterIcon,
-    DepartureIcon,
+    MenuComponet,
     CardPlaylist,
     IconPlaylist,
     MediaPlaylist,
     AlertErrorComponent,
     SkeletonComponent,
+    // ButtonComponent,
   },
   setup() {
     const playlistStore = usePlaylistStore();
     const detail = usePlaylistDetailStore();
-    const open = useSidebarStore();
+    const sidebarStore = useSidebarStore();
+
+    const offset = ref(0);
 
     const onClick = (value) => {
-      open.$patch((state) => {
+      sidebarStore.$patch((state) => {
         if (!state.open) {
           state.open = !state.open;
         }
@@ -101,12 +104,24 @@ export default {
     };
 
     const { result } = storeToRefs(playlistStore);
+    const { open } = storeToRefs(sidebarStore);
 
-    onMounted(() => playlistStore.playlistGetAll());
+    const loadMore = () => {
+      playlistStore.playlistGetAll({
+        offset: offset.value + 1,
+        loadmore: true,
+      });
+    };
+
+    onMounted(() => {
+      playlistStore.playlistGetAll({ offset: offset.value });
+    });
 
     return {
       onClick,
       result,
+      open,
+      loadMore,
     };
   },
 };
