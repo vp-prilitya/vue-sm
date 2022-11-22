@@ -2,19 +2,24 @@
   <div class="flex justify-center basis-9/12 md:border-r-2">
     <arrival-info />
   </div>
-  <div class="basis-full h-auto md:border-l-2 md:border-gray-400 px-10">
+  <div
+    @drop="onDrop($event)"
+    @dragover.prevent
+    @dragenter.prevent
+    class="basis-full h-auto md:border-l-2 md:border-gray-400 px-10"
+  >
     <div
-      v-show="!selected"
+      v-show="!dataItem.id"
       @click="clickSelect"
       class="flex items-center border-dashed border-2 border-black justify-center bg-gray-300 h-[250px] text-center text-sm hover:cursor-pointer"
     >
       Pilih playlist untuk slot <span class="font-bold pl-1"> Arrival</span>
     </div>
-    <div v-show="selected" class="w-[200px]">
+    <div v-show="dataItem.id" class="w-[200px]">
       <title-sub-icon
-        :title="'PL-Ads Arrival'"
-        :subtitle="'Arrival'"
-        :subtitle2="'Media 1'"
+        :title="dataItem.name"
+        :subtitle="dataItem.type"
+        :subtitle2="`Media ${dataItem.count}`"
         :subtitleColor="'text-primary'"
       >
         <icon-media />
@@ -48,7 +53,7 @@ export default {
     IconPlay,
   },
   setup() {
-    const selected = ref(false);
+    const dataItem = ref({});
     const userSidebar = useSidebarStore();
 
     onMounted(() => {
@@ -57,16 +62,14 @@ export default {
       });
     });
 
-    const clickSelect = () => {
-      selected.value = true;
-      userSidebar.$patch((state) => {
-        state.open = false;
-      });
+    const onDrop = (evt) => {
+      const item = JSON.parse(evt.dataTransfer.getData("itemData"));
+      dataItem.value = item;
     };
 
     return {
-      selected,
-      clickSelect,
+      dataItem,
+      onDrop,
     };
   },
 };

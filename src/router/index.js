@@ -8,7 +8,12 @@ import SlotView from "../views/slot/SlotView.vue";
 import SlotArrival from "../views/slot/SlotArrival.vue";
 import SlotDeparture from "../views/slot/SlotDeparture.vue";
 import SlotInformationSvg from "@/components/SlotInformationSvg.vue";
-import { useAuthStore, useAlertStore, useSidebarStore } from "@/store";
+import {
+  useAuthStore,
+  useAlertStore,
+  useSidebarStore,
+  useScrollStore,
+} from "@/store";
 
 const routes = [
   {
@@ -78,9 +83,11 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   const alertStore = useAlertStore();
   const sidebarStore = useSidebarStore();
+  const scroll = useScrollStore();
 
   alertStore.clear();
   sidebarStore.$reset();
+  scroll.$reset();
 
   const publicPages = ["/login"];
   const authRequired = !publicPages.includes(to.path);

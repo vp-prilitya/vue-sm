@@ -19,6 +19,9 @@
         :message="result.error.response.data.message"
       />
     </div>
+    <div v-if="result.data?.length == 0" class="flex justify-center">
+      <no-data :size="'w-[30rem]'" />
+    </div>
   </div>
 </template>
 
@@ -27,6 +30,7 @@ import SearchInput from "@/components/SearchInput.vue";
 import CardDevice from "@/components/CardDevice.vue";
 import DeviceListSkeleton from "./DeviceListSkeleton.vue";
 import AlertErrorComponent from "@/components/AlertErrorComponent.vue";
+import NoData from "@/components/NoData.vue";
 import { useDeviceStore } from "@/store";
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
@@ -38,6 +42,7 @@ export default {
     CardDevice,
     DeviceListSkeleton,
     AlertErrorComponent,
+    NoData,
   },
   setup() {
     const deviceStore = useDeviceStore();

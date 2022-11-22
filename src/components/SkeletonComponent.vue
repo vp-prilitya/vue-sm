@@ -3,9 +3,7 @@
     role="status"
     class="flex justify-center items-center h- rounded-lg animate-pulse"
     :class="[height, width, color]"
-  >
-    <span class="sr-only">Loading...</span>
-  </div>
+  ></div>
 </template>
 
 <script>

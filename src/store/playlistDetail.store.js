@@ -18,7 +18,11 @@ export const usePlaylistDetailStore = defineStore({
   },
   actions: {
     async playlistDetailGetAll(params) {
-      this.result = { loading: true };
+      if (!params.loadmore) {
+        this.result = { loading: true };
+      } else {
+        this.result = { loading: true, ...this.result };
+      }
 
       const Dataparams = {
         limit: params?.limit || 10,
@@ -32,9 +36,20 @@ export const usePlaylistDetailStore = defineStore({
       try {
         const data = await debouncedFetch("playlistdetail", Dataparams);
 
-        this.result = { ...data.data };
+        if (!params.loadmore) {
+          this.result = { ...data.data };
+        } else {
+          this.result = {
+            ...data.data,
+            data: this.result.data,
+          };
+
+          this.result.data.push(...data.data.data);
+        }
       } catch (error) {
-        this.result = { error };
+        if (!params.loadmore) {
+          this.result = { error };
+        }
       }
     },
   },

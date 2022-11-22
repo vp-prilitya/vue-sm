@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="fixed inset-y-0 z-10 flex flex-shrink-0 bg-primary border-r md:static focus:outline-none hidden md:block"
+    class="fixed inset-y-0 z-10 flex-shrink-0 bg-primary border-r md:static focus:outline-none hidden md:block"
   >
     <nav class="flex flex-col flex-shrink-0 h-full px-4 py-4 border-r">
       <div class="flex flex-col items-center justify-center flex-1 space-y-6">
@@ -26,11 +26,7 @@
             />
           </svg>
         </a>
-        <a
-          href="#"
-          class="p-2 text-white transition-colors duration-200 hover:text-amber focus:outline-none focus:bg-indigo-100 focus:ring-indigo-800"
-        >
-          <span class="sr-only">Another Link</span>
+        <navigation-link routeLink="/slot">
           <svg
             class="w-7 h-7 fill-white"
             viewBox="0 0 39 41"
@@ -41,7 +37,7 @@
               d="M34.375 5.04167V35.9583H4.625V5.04167H34.375ZM38.625 0.625H0.375V40.375H38.625V0.625ZM30.125 31.5417H8.875V29.3333H30.125V31.5417ZM30.125 27.125H8.875V24.9167H30.125V27.125ZM30.125 20.5H8.875V9.45833H30.125V20.5Z"
             />
           </svg>
-        </a>
+        </navigation-link>
       </div>
       <div class="flex items-center justify-center flex-shrink-0">
         <a

@@ -6,3 +6,4 @@ export * from "./error.store";
 export * from "./device.store";
 export * from "./playlist.store";
 export * from "./playlistDetail.store";
+export * from "./scroll.store";

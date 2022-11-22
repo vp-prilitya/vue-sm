@@ -12,8 +12,8 @@ export const usePlaylistStore = defineStore({
     },
   }),
   getters: {
-    getData(state) {
-      return state.result;
+    getDataResult(state) {
+      return state.result.data;
     },
   },
   actions: {
@@ -39,14 +39,17 @@ export const usePlaylistStore = defineStore({
         if (!params.loadmore) {
           this.result = { ...data.data };
         } else {
-          // this.result = {
-          //   ...data.data,
-          //   data: this.result.data.push(data.data.data),
-          // };
-          console.log(this.result.data.push([]));
+          this.result = {
+            ...data.data,
+            data: this.result.data,
+          };
+
+          this.result.data.push(...data.data.data);
         }
       } catch (error) {
-        this.result = { ...this.result, error };
+        if (!params.loadmore) {
+          this.result = { error };
+        }
       }
     },
   },

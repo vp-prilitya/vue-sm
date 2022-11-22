@@ -15,7 +15,7 @@
     </svg>
     <span class="sr-only">Info</span>
     <div class="ml-3 text-sm font-medium text-red-700">
-      {{ message }}
+      {{ message || "Something went wrong " }}
     </div>
   </div>
 </template>

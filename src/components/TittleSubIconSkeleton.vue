@@ -7,7 +7,7 @@
     />
     <div class="space-y-1">
       <skeleton-component :color="color" height="h-6" width="w-44" />
-      <skeleton-component :color="color" height="h-6" width="w-32" />
+      <skeleton-component :color="color" height="h-4" width="w-32" />
     </div>
   </div>
 </template>

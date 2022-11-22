@@ -37,14 +37,10 @@
             :message="result.error.response.data.message"
           />
         </div>
-        <!-- <div v-show="result.data?.length" class="flex justify-center p-8">
-          <button-component
-            @click="loadMore"
-            :vClass="'w-[200px] bg-btnGray hover:bg-gray-300 rounded-full focus:ring-gray-300 '"
-          >
-            Load more
-          </button-component>
-        </div> -->
+
+        <div v-if="result.data?.length == 0" class="flex justify-center pb-8">
+          <no-data :size="'w-[30rem]'" />
+        </div>
       </main-content>
     </div>
     <media-playlist></media-playlist>
@@ -56,18 +52,19 @@ import HeaderTitle from "@/components/HeaderTitle.vue";
 import MainContent from "@/components/MainContent.vue";
 import SkeletonComponent from "@/components/SkeletonComponent.vue";
 import MenuComponet from "@/components/MenuComponent.vue";
+import NoData from "@/components/NoData.vue";
 import CardPlaylist from "../../components/CardPlaylist.vue";
 import IconPlaylist from "@/components/icons/IconPlaylist.vue";
 import MediaPlaylist from "./MediaPlaylist.vue";
 import AlertErrorComponent from "@/components/AlertErrorComponent.vue";
-// import ButtonComponent from "@/components/ButtonComponent.vue";
 import {
   usePlaylistDetailStore,
   usePlaylistStore,
+  useScrollStore,
   useSidebarStore,
 } from "@/store";
 import { storeToRefs } from "pinia";
-import { onMounted, ref } from "@vue/runtime-core";
+import { onMounted, ref, watchEffect } from "@vue/runtime-core";
 
 export default {
   name: "PlaylistView",
@@ -80,14 +77,17 @@ export default {
     MediaPlaylist,
     AlertErrorComponent,
     SkeletonComponent,
-    // ButtonComponent,
+    NoData,
   },
   setup() {
     const playlistStore = usePlaylistStore();
     const detail = usePlaylistDetailStore();
     const sidebarStore = useSidebarStore();
-
+    const scroll = useScrollStore();
     const offset = ref(0);
+
+    const { result } = storeToRefs(playlistStore);
+    const { open } = storeToRefs(sidebarStore);
 
     const onClick = (value) => {
       sidebarStore.$patch((state) => {
@@ -99,22 +99,36 @@ export default {
           detail.playlistDetailGetAll({ playlistid: value.playlistid });
           state.id = value.playlistid;
           state.data = value;
+          state.data.offset = 0;
         }
       });
     };
 
-    const { result } = storeToRefs(playlistStore);
-    const { open } = storeToRefs(sidebarStore);
-
     const loadMore = () => {
+      offset.value++;
+
       playlistStore.playlistGetAll({
-        offset: offset.value + 1,
+        offset: offset.value,
         loadmore: true,
       });
     };
 
     onMounted(() => {
       playlistStore.playlistGetAll({ offset: offset.value });
+    });
+
+    watchEffect(() => {
+      if (scroll.getBottom) {
+        playlistStore.$patch((state) => {
+          if (
+            state.result.data?.length &&
+            !state.result.loading &&
+            state.result.data?.length < state.result.count
+          ) {
+            loadMore();
+          }
+        });
+      }
     });
 
     return {

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed flex justify-center items-center bg-opacity-50 justify-center top-0 right-0 left-0 bg-gray-700 z-50 h-screen w-full"
+    class="fixed flex items-center bg-opacity-50 justify-center top-0 right-0 left-0 bg-gray-700 z-50 h-screen w-full"
     :class="{ hidden: !open, block: open }"
   >
     <div class="relative p-4 w-full max-w-sm h-full md:h-auto">
