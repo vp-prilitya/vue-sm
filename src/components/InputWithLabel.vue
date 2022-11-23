@@ -6,10 +6,11 @@
       >{{ label }}</label
     >
     <Field
+      :as="as"
       :type="type"
       :id="name"
       :name="name"
-      class="bg-gray-50 border transition border-gray-300 text-gray-900 text-sm rounded-lg transition duration-300 block w-full p-2.5"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg transition duration-300 block w-full p-2.5"
       :placeholder="placeholder"
       :class="{
         'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500':
@@ -37,6 +38,7 @@ export default {
     placeholder: String,
     name: String,
     error: String,
+    as: String,
   },
 };
 </script>

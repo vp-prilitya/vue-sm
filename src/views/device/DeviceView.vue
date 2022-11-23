@@ -14,6 +14,7 @@
         </div>
       </div>
     </main-content>
+    <AddDeviceGroupVue></AddDeviceGroupVue>
   </div>
 </template>
 
@@ -23,6 +24,7 @@ import MainContent from "@/components/MainContent.vue";
 import DeviceGroupList from "./DeviceGroupList.vue";
 import IconDevice from "@/components/icons/IconDevice.vue";
 import DeviceList from "./DeviceList.vue";
+import AddDeviceGroupVue from "./AddDeviceGroup.vue";
 
 export default {
   components: {
@@ -31,7 +33,7 @@ export default {
     DeviceGroupList,
     IconDevice,
     DeviceList,
+    AddDeviceGroupVue,
   },
-  setup() {},
 };
 </script>

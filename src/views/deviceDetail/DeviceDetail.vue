@@ -28,16 +28,14 @@
                 </div>
               </div>
               <div class="flex space-x-3">
-                <button-component
-                  vClass="btn-gray space-x-3 text-md text-primary text-center inline-flex items-center justify-center"
-                >
-                  <icon-schedule :addClass="'mr-2'" />
+                <button-component vClass="btn-gray w-full text-md text-primary">
+                  <icon-schedule />
                   Schedule
                 </button-component>
                 <button-component
-                  vClass="btn-gray text-md text-primary text-center inline-flex items-center justify-center"
+                  vClass="btn-gray w-full  text-md text-primary "
                 >
-                  <icon-playlist :addClass="'mr-2'" color="fill-blueSide" />
+                  <icon-playlist color="fill-blueSide" />
                   Playlist
                 </button-component>
               </div>

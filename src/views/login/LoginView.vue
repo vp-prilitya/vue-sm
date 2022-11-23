@@ -36,7 +36,9 @@
             type="password"
             :error="errors.password"
           />
-          <button-component :loading="isSubmitting">Sign In</button-component>
+          <button-component vClass="w-full btn-darkBlue" :loading="isSubmitting"
+            >Sign In</button-component
+          >
         </Form>
       </card-component>
     </div>

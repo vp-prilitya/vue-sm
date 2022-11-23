@@ -14,31 +14,25 @@
         <icon-edit :color="'fill-white'" />
       </tittle-betweent>
     </div>
-    <div class="px-8 space-y-5">
-      <div class="flex space-x-3 items-center">
-        <icon-group-device :color="'fill-white'" size="w-7 h-7 " />
-        <h3 class="text-md" :class="'text-white'">KRL-JR105</h3>
-      </div>
-      <div class="flex space-x-3 items-center">
+    <div class="flex flex-col px-8 space-y-5 [&>svg]:w-7 [&>svg]:h-7">
+      <TextIconGroup text="KRL-JR105" :textWhite="true" textSize="text-md">
+        <icon-group-device size="w-7 h-7 " />
+      </TextIconGroup>
+      <TextIconGroup text="v1.1.0" :textWhite="true" textSize="text-md">
         <icon-version :color="'fill-white'" size="w-7 h-7 " />
-        <h3 class="text-md" :class="'text-white'">v1.1.0</h3>
-      </div>
-      <div class="flex space-x-3 items-center">
+      </TextIconGroup>
+      <TextIconGroup text="80%" :textWhite="true" textSize="text-md">
         <icon-audio :color="'fill-white'" size="w-7 h-7 " />
-        <h3 class="text-md" :class="'text-white'">80%</h3>
-      </div>
-      <div class="flex space-x-3 items-center">
+      </TextIconGroup>
+      <TextIconGroup text="Audioland" :textWhite="true" textSize="text-md">
         <icon-model :color="'fill-white'" size="w-7 h-7 " />
-        <h3 class="text-md" :class="'text-white'">Audioland</h3>
-      </div>
-      <div class="flex space-x-3 items-center">
+      </TextIconGroup>
+      <TextIconGroup text="32 GB" :textWhite="true" textSize="text-md">
         <icon-memory :color="'fill-white'" size="w-7 h-7 " />
-        <h3 class="text-md" :class="'text-white'">32 GB</h3>
-      </div>
-      <div class="flex space-x-3 items-center">
+      </TextIconGroup>
+      <TextIconGroup text="Ref-v2" :textWhite="true" textSize="text-md">
         <icon-device-information :color="'fill-white'" size="w-7 h-7 " />
-        <h3 class="text-md" :class="'text-white'">Ref-v2</h3>
-      </div>
+      </TextIconGroup>
     </div>
   </sidebar-right>
 </template>
@@ -55,6 +49,7 @@ import IconDeviceInformation from "@/components/icons/IconDeviceInformation.vue"
 import IconVersion from "@/components/icons/IconVersion.vue";
 import IconModel from "@/components/icons/IconModel.vue";
 import IconMemory from "@/components/icons/IconMemory.vue";
+import TextIconGroup from "@/components/TextIconGroup.vue";
 
 export default {
   components: {
@@ -69,6 +64,7 @@ export default {
     IconVersion,
     IconModel,
     IconMemory,
+    TextIconGroup,
   },
 };
 </script>

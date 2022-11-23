@@ -4,7 +4,7 @@
       <h1 class="text-xl text-primary font-bold">Device Group</h1>
       <div class="flex space-x-3">
         <icon-search />
-        <icon-file-add />
+        <icon-file-add @click="modal.showModal" :addClass="'cursor-pointer'" />
       </div>
     </div>
     <div class="overflow-y-auto h-128">
@@ -54,7 +54,7 @@ import CardDeviceGroup from "@/components/CardDeviceGroup.vue";
 import AlertErrorComponent from "@/components/AlertErrorComponent.vue";
 import NoData from "@/components/NoData.vue";
 import DeviceGroupListSkeleton from "./DeviceGroupListSkeleton.vue";
-import { useDeviceGroupStore, useDeviceStore } from "@/store";
+import { useDeviceGroupStore, useDeviceStore, useModalStore } from "@/store";
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 
@@ -70,6 +70,7 @@ export default {
   setup() {
     const deviceGroupStore = useDeviceGroupStore();
     const deviceStore = useDeviceStore();
+    const modal = useModalStore();
     const { result } = storeToRefs(deviceGroupStore);
     const selected = ref("all");
 
@@ -87,6 +88,7 @@ export default {
       result,
       selected,
       onSelect,
+      modal,
     };
   },
 };

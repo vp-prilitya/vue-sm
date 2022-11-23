@@ -3,6 +3,7 @@
     <arrival-info />
   </div>
   <div
+    @click="onClick"
     @drop="onDrop($event)"
     @dragover.prevent
     @dragenter.prevent
@@ -62,6 +63,12 @@ export default {
       });
     });
 
+    const onClick = () => {
+      userSidebar.$patch((state) => {
+        state.open = true;
+      });
+    };
+
     const onDrop = (evt) => {
       const item = JSON.parse(evt.dataTransfer.getData("itemData"));
       dataItem.value = item;
@@ -70,6 +77,7 @@ export default {
     return {
       dataItem,
       onDrop,
+      onClick,
     };
   },
 };

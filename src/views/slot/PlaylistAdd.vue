@@ -12,9 +12,9 @@
           <path d="M14 8H8V14H6V8H0V6H6V0H8V6H14V8Z" fill="white" />
         </svg>
       </tittle-between>
-      <div class="">
+      <div class="px-4">
         <title-sub-icon
-          addClass="px-8 py-2 cursor-grabbing"
+          addClass="px-4 py-2 cursor-grabbing"
           draggable="true"
           @dragstart="startDrag($event, item)"
           v-for="item in items"

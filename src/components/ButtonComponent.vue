@@ -2,7 +2,7 @@
   <button
     type="submit"
     :class="[vClass]"
-    class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
+    class="[&>svg]:mr-2 [&>svg]:text-center [&>svg]:inline-flex [&>svg]:items-center [&>svg]:justify-center text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center"
     :disabled="loading"
   >
     <loading-button v-if="loading" />
@@ -20,7 +20,7 @@ export default {
   props: {
     vClass: {
       type: String,
-      default: "bg-blue-800 hover:bg-blue-900 focus:ring-blue-300",
+      default: "btn-darkBlue",
     },
     loading: {
       type: Boolean,

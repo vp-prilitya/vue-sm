@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-6 max-w-sm bg-white rounded-lg bg-cardColor border border-blueSide shadow-md transition duration-300"
+    class="p-6 max-w-sm rounded-lg bg-cardColor border border-blueSide shadow-md transition duration-300"
     :class="[
       { 'hover:scale-105': scale },
       addClass,
