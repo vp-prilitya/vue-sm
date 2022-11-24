@@ -1,6 +1,7 @@
 import { getData } from "@/utils/fetch";
 import { defineStore } from "pinia";
 import debounce from "debounce-promise";
+import { useScrollStore } from "./scroll.store";
 
 let debouncedFetch = debounce(getData, 0);
 
@@ -10,21 +11,31 @@ export const useDeviceStore = defineStore({
     result: {
       count: 0,
     },
+    q: "all",
   }),
   getters: {
     getData(state) {
       return state.result;
     },
+    getQuery(state) {
+      return state.q;
+    },
   },
   actions: {
     async deviceGetAll(params) {
-      this.result = { loading: true };
+      if (!params.loadmore) {
+        this.result = { loading: true };
+      } else {
+        this.result = { loading: true, ...this.result };
+      }
+
+      this.q = !params.q ? "all" : params?.q;
 
       const Dataparams = {
         limit: params?.limit || 10,
         offset: params?.offset || 0,
         order: params?.order || "deviceid",
-        orderType: params?.orderType || "desc",
+        ordertype: params?.orderType || "desc",
         isactive: params?.isactive || 1,
         q: params?.q,
       };
@@ -32,9 +43,23 @@ export const useDeviceStore = defineStore({
       try {
         const data = await debouncedFetch("device", Dataparams);
 
-        this.result = { ...data.data };
+        if (!params.loadmore) {
+          this.result = { ...data.data };
+        } else {
+          this.result = {
+            ...data.data,
+            data: this.result.data,
+          };
+
+          const scroll = useScrollStore();
+          scroll.bottom = false;
+
+          this.result.data.push(...data.data.data);
+        }
       } catch (error) {
-        this.result = { error };
+        if (!params.loadmore) {
+          this.result = { error };
+        }
       }
     },
   },

@@ -4,7 +4,7 @@
     :class="{ 'w-0 ': !open, 'width-sidebar': open }"
   >
     <div
-      class="absolute ease-in-out flex-row bg-blueSide h-full pb-8 pt-8"
+      class="absolute ease-in-out flex-row bg-blueSide h-full pt-8"
       :class="{ 'w-0 ': !open, 'width-sidebar': open }"
     >
       <div
@@ -29,12 +29,22 @@
         </svg>
       </div>
       <slot v-if="open" />
+      <div
+        v-if="open"
+        class="absolute w-full bg-primary bottom-0 pb-[5px] px-2 items-center space-x-1 border-t border-blue-900"
+      >
+        <kbd
+          class="px-1 py-[2px] text-[0.5rem] font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500"
+          >Esc</kbd
+        >
+        <span class="text-white text-[0.8rem]">exit</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useSidebarStore } from "@/store";
 
 export default {
@@ -51,6 +61,16 @@ export default {
     const close = () => {
       sidebar.$reset();
     };
+
+    const keyboardListen = (event) => {
+      if (event.key === "Escape") {
+        sidebar.$reset();
+      }
+    };
+
+    onMounted(() => {
+      window.addEventListener("keydown", keyboardListen);
+    });
 
     return {
       open,

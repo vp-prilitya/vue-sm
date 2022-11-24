@@ -14,24 +14,24 @@
         <icon-edit :color="'fill-white'" />
       </tittle-betweent>
     </div>
-    <div class="flex flex-col px-8 space-y-5 [&>svg]:w-7 [&>svg]:h-7">
+    <div class="flex flex-col px-8 space-y-5 [&_svg]:w-7 [&_svg]:h-7">
       <TextIconGroup text="KRL-JR105" :textWhite="true" textSize="text-md">
-        <icon-group-device size="w-7 h-7 " />
+        <icon-group-device />
       </TextIconGroup>
       <TextIconGroup text="v1.1.0" :textWhite="true" textSize="text-md">
-        <icon-version :color="'fill-white'" size="w-7 h-7 " />
+        <icon-version />
       </TextIconGroup>
       <TextIconGroup text="80%" :textWhite="true" textSize="text-md">
-        <icon-audio :color="'fill-white'" size="w-7 h-7 " />
+        <icon-audio />
       </TextIconGroup>
       <TextIconGroup text="Audioland" :textWhite="true" textSize="text-md">
-        <icon-model :color="'fill-white'" size="w-7 h-7 " />
+        <icon-model />
       </TextIconGroup>
       <TextIconGroup text="32 GB" :textWhite="true" textSize="text-md">
-        <icon-memory :color="'fill-white'" size="w-7 h-7 " />
+        <icon-memory />
       </TextIconGroup>
       <TextIconGroup text="Ref-v2" :textWhite="true" textSize="text-md">
-        <icon-device-information :color="'fill-white'" size="w-7 h-7 " />
+        <icon-device-information />
       </TextIconGroup>
     </div>
   </sidebar-right>

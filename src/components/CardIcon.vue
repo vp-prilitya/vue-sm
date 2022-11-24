@@ -1,7 +1,7 @@
 <template>
   <router-link
     :to="routeLink"
-    active-class="bg-gray-200"
+    active-class="bg-gray-100"
     class="py-6 px-9 relative m-3 md:w-1/6 bg-white rounded-lg border border-primary shadow-md hover:bg-gray-200"
     v-slot="{ isActive }"
   >

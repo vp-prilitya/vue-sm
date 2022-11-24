@@ -1,6 +1,7 @@
 import { getData } from "@/utils/fetch";
 import { defineStore } from "pinia";
 import debounce from "debounce-promise";
+import { useScrollStore } from "./scroll.store";
 
 let debouncedFetch = debounce(getData, 500);
 
@@ -43,6 +44,9 @@ export const usePlaylistStore = defineStore({
             ...data.data,
             data: this.result.data,
           };
+
+          const scroll = useScrollStore();
+          scroll.bottom = false;
 
           this.result.data.push(...data.data.data);
         }
