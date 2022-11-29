@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex-none ease-in-out duration-300 max-h-full h-screen"
+    class="flex-none ease-in-out duration-300 max-h-full h-screen hidden md:block"
     :class="{ 'w-0 ': !open, 'width-sidebar': open }"
   >
     <div

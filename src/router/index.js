@@ -8,6 +8,8 @@ import SlotView from "../views/slot/SlotView.vue";
 import SlotArrival from "../views/slot/SlotArrival.vue";
 import SlotDeparture from "../views/slot/SlotDeparture.vue";
 import SlotInformationSvg from "@/components/SlotInformationSvg.vue";
+import DisplayLog from "../views/displayLog/DisplayLog.vue";
+
 import {
   useAuthStore,
   useAlertStore,
@@ -70,6 +72,11 @@ const routes = [
             component: SlotDeparture,
           },
         ],
+      },
+      {
+        path: "/display-log",
+        name: "display-log",
+        component: DisplayLog,
       },
     ],
   },

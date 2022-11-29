@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="flex w-full">
     <div class="main">
       <header-title title="Slot">
         <icon-slot />

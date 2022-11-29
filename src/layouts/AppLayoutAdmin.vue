@@ -1,12 +1,8 @@
 <template>
-  <div class="flex flex-1 h-screen">
+  <div class="flex flex-1 h-screen w-screen">
     <NavigationWeb />
     <div @scroll="scrolling" class="flex flex-1 h-screen overflow-auto">
-      <main class="flex-1">
-        <div class="flex-col">
-          <router-view />
-        </div>
-      </main>
+      <router-view />
     </div>
   </div>
 </template>

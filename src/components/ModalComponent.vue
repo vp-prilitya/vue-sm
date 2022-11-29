@@ -49,7 +49,7 @@
 
             <ButtonComponentVue
               @click="modal.closeModal"
-              vClass="text-gray-500 bg-white hover:bg-gray-100 border border-gray-200 hover:text-gray-900"
+              vClass="text-gray-600 bg-white hover:bg-gray-100 border border-gray-200 hover:text-gray-900"
             >
               Close
             </ButtonComponentVue>
