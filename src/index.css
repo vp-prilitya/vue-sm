@@ -17,3 +17,15 @@
 .btn-darkBlue {
   @apply bg-blue-800 hover:bg-blue-900 focus:ring-blue-300;
 }
+
+.btn-amber {
+  @apply bg-amber hover:bg-amber500 focus:bg-amber400;
+}
+
+.input-default {
+  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg transition duration-300 block w-full py-2.5 pr-8 pl-4;
+}
+
+.input-blue {
+  @apply bg-inputBlue border border-blueSide  text-sm rounded-lg transition duration-300 block w-full py-2.5 pr-8 pl-4 placeholder-white focus:ring-blueSide text-white;
+}

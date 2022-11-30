@@ -16,6 +16,7 @@ module.exports = {
       cardColor: "#F6F6F6",
       contentColor: "#E7E7E9",
       btnGray: "#C6C4C2",
+      inputBlue: "#39497a",
     },
 
     extend: {

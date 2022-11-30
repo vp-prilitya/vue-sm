@@ -7,8 +7,14 @@
       :value="!showOptions ? value : searchTerm"
       :placeholder="placeholder"
       @input="handleInput"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg transition duration-300 block w-full py-2.5 pr-8 pl-4"
-      :class="showOptions ? 'cursor-text' : 'cursor-default  hover:bg-gray-100'"
+      class=""
+      :class="[
+        showOptions ? 'cursor-text' : 'cursor-default',
+        { 'input-default': theme == 'default' },
+        { 'input-blue': theme == 'blue' },
+        { '  hover:bg-gray-100': theme == 'default' && !showOptions },
+        { '  hover:bg-primary': theme == 'blue' && !showOptions },
+      ]"
       autocomplete="off"
     />
     <span
@@ -41,7 +47,7 @@
           class="px-3 py-2 cursor-pointer hover:bg-gray-200"
           :class="{ 'bg-gray-200': item[optionsKey] == formControlName }"
         >
-          {{ mappingSearch(item[optionsValue]) }}
+          {{ item[optionsValue] }}
         </li>
         <li
           v-if="!dataSelect.length"
@@ -61,6 +67,10 @@ import { onMounted } from "@vue/runtime-core";
 
 export default {
   props: {
+    theme: {
+      type: String,
+      default: "blue",
+    },
     data: {
       type: Array,
       required: true,
@@ -120,13 +130,6 @@ export default {
       emit("update:formControlName", item[optionsKey.value]);
     };
 
-    const mappingSearch = (item) => {
-      //   const data = "e";
-      //   item.replace(data, "<b>" + data + "</b>");
-
-      return item;
-    };
-
     return {
       showOptions,
       searchTerm,
@@ -136,7 +139,6 @@ export default {
       openSelect,
       value,
       dataSelect,
-      mappingSearch,
     };
   },
 };

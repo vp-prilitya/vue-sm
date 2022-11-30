@@ -8,3 +8,4 @@ export * from "./playlist.store";
 export * from "./playlistDetail.store";
 export * from "./scroll.store";
 export * from "./modal.store";
+export * from "./displaylog.store";
