@@ -1,6 +1,6 @@
 <template>
   <sidebar-right>
-    <div class="relative overflow-y-scroll h-full pb-24">
+    <div class="overflow-hidden h-full pb-24">
       <div class="px-8">
         <TextIconGroup :text="'Filter'" :textWhite="true" :textSize="'text-md'">
           <svg
@@ -20,6 +20,10 @@
         </TextIconGroup>
       </div>
       <div class="pt-5 px-8">
+        <div ref="target" class="relative">
+          <InputDate label="Date" />
+        </div>
+
         <SelectSearchLabel
           :label="'Device group'"
           :data="searchResults"
@@ -65,24 +69,6 @@
           placeholder="Select items"
           labelColor="text-white"
         />
-        <SelectSearchLabel
-          :label="'Start date'"
-          :data="searchResults"
-          :optionsValue="'name'"
-          :optionsKey="'id'"
-          v-model:formControlName="valueSearch"
-          placeholder="Select items"
-          labelColor="text-white"
-        />
-        <SelectSearchLabel
-          :label="'End date'"
-          :data="searchResults"
-          :optionsValue="'name'"
-          :optionsKey="'id'"
-          v-model:formControlName="valueSearch"
-          placeholder="Select items"
-          labelColor="text-white"
-        />
       </div>
     </div>
     <div
@@ -100,7 +86,9 @@ import SidebarRight from "@/components/SidebarRight.vue";
 import TextIconGroup from "@/components/TextIconGroup.vue";
 import SelectSearchLabel from "@/components/SelectSearchWithLabel.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
+import InputDate from "@/components/InputDate.vue";
 import { ref } from "@vue/reactivity";
+import { onClickOutside } from "@vueuse/core";
 
 export default {
   components: {
@@ -108,8 +96,12 @@ export default {
     TextIconGroup,
     ButtonComponent,
     SelectSearchLabel,
+    InputDate,
   },
   setup() {
+    const target = ref(null);
+    // const isOverflow = ref(true);
+
     const searchResults = [
       {
         id: 1,
@@ -145,12 +137,18 @@ export default {
       },
     ];
     const valueSearch = ref("");
+
+    onClickOutside(target, (event) => {
+      if (event) {
+        console.log("oke");
+      }
+    });
+
     return {
       searchResults,
       valueSearch,
+      target,
     };
   },
 };
 </script>
-
-<style lang="scss" scoped></style>

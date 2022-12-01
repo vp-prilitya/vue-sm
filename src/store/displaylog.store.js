@@ -29,7 +29,7 @@ export const useDisplayLogStore = defineStore({
       const dateNow = moment(new Date()).format("YYYY-MM-DD");
 
       const Dataparams = {
-        limit: params?.limit || 20,
+        limit: params?.limit || 40,
         offset: params?.offset || 0,
         deviceid: params?.deviceid,
         mediaid: params?.mediaid,
@@ -56,8 +56,6 @@ export const useDisplayLogStore = defineStore({
 
           this.result.data.push(...data.data.data);
         }
-
-        this.result = { ...data.data };
       } catch (error) {
         if (!params.loadmore) {
           this.result = { error };

@@ -93,7 +93,7 @@
         </tbody>
       </table>
     </div>
-    <LoadingLottie v-if="result.loading" class="mt-28" />
+    <LoadingLottie v-if="result.loading" />
     <div v-if="result.data?.length == 0" class="flex justify-center p-10">
       <NoData size="w-7/12" />
     </div>
@@ -142,7 +142,7 @@ export default {
       offset.value++;
 
       displayLogStore.getAll({
-        offset: offset.value * 10,
+        offset: offset.value,
         loadmore: true,
       });
     };
@@ -156,7 +156,7 @@ export default {
             state.result.data?.length < state.result.count
           ) {
             loadMore();
-            console.log("getdata");
+            // console.log("getdata");
           }
         });
       }
