@@ -27,5 +27,5 @@
 }
 
 .input-blue {
-  @apply bg-inputBlue border border-blueSide  text-sm rounded-lg transition duration-300 block w-full py-2.5 pr-8 pl-4 placeholder-white focus:ring-blueSide text-white;
+  @apply bg-inputBlue border border-blueSide  text-sm rounded-lg transition duration-300 block w-full py-2.5 pr-8  placeholder-white focus:ring-blueSide text-white;
 }

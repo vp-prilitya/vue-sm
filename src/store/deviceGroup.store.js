@@ -17,21 +17,17 @@ export const useDeviceGroupStore = defineStore({
     },
   },
   actions: {
-    async groupDeviceGetAll(
-      limit = 10,
-      offset = 0,
-      order = "devicegroupname",
-      orderType = "desc"
-    ) {
+    async groupDeviceGetAll(params) {
       this.result = { loading: true };
-      const params = {
-        limit: limit,
-        offset: offset,
-        order: order,
-        orderType: orderType,
+      const dataParams = {
+        limit: params?.limit || 10,
+        offset: params?.offset || 0,
+        order: params?.order || "devicegroupname",
+        orderType: params?.orderType || "desc",
       };
+
       try {
-        const data = await debouncedFetch("devicegroup", params);
+        const data = await debouncedFetch("devicegroup", dataParams);
 
         this.result = { ...data.data };
       } catch (error) {

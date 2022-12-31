@@ -1,6 +1,6 @@
 <template>
   <sidebar-right>
-    <div class="overflow-hidden h-full pb-24">
+    <div class="overflow-y-auto h-full pb-24">
       <div class="px-8">
         <TextIconGroup :text="'Filter'" :textWhite="true" :textSize="'text-md'">
           <svg
@@ -20,61 +20,61 @@
         </TextIconGroup>
       </div>
       <div class="pt-5 px-8">
-        <div ref="target" class="relative">
-          <InputDate label="Date" />
-        </div>
+        <div>
+          <Datepicker
+            v-model="date"
+            :enable-time-picker="false"
+            :format="format"
+            calendar-class-name="p-3"
+            input-class-name="input-blue"
+            menu-class-name="sd"
+            range
+          />
 
-        <SelectSearchLabel
-          :label="'Device group'"
-          :data="searchResults"
-          :optionsValue="'name'"
-          :optionsKey="'id'"
-          v-model:formControlName="valueSearch"
-          placeholder="Select items"
-          labelColor="text-white"
-        />
-        <SelectSearchLabel
-          :label="'Device Id'"
-          :data="searchResults"
-          :optionsValue="'name'"
-          :optionsKey="'id'"
-          v-model:formControlName="valueSearch"
-          placeholder="Select items"
-          labelColor="text-white"
-        />
-        <SelectSearchLabel
-          :label="'Media type'"
-          :data="searchResults"
-          :optionsValue="'name'"
-          :optionsKey="'id'"
-          v-model:formControlName="valueSearch"
-          placeholder="Select items"
-          labelColor="text-white"
-        />
-        <SelectSearchLabel
-          :label="'Station'"
-          :data="searchResults"
-          :optionsValue="'name'"
-          :optionsKey="'id'"
-          v-model:formControlName="valueSearch"
-          placeholder="Select items"
-          labelColor="text-white"
-        />
-        <SelectSearchLabel
-          :label="'Media'"
-          :data="searchResults"
-          :optionsValue="'name'"
-          :optionsKey="'id'"
-          v-model:formControlName="valueSearch"
-          placeholder="Select items"
-          labelColor="text-white"
-        />
+          <SelectDeviceGroup
+            :formControlName="filter.deviceGroupId"
+            labelColor="text-white"
+            theme="blue"
+            @onSelectChange="change"
+          />
+
+          <SelectSearchLabel
+            :label="'Device Id'"
+            :data="dataByGroup.data?.length ? dataByGroup.data : []"
+            :optionsValue="'deviceid'"
+            :optionsKey="'deviceid'"
+            v-model:formControlName="filter.deviceId"
+            placeholder="Select device"
+            theme="blue"
+            :loading="dataByGroup.loading ? true : false"
+            labelColor="text-white"
+          />
+
+          <SelectMediaType
+            v-model:formControlName="filter.mediaType"
+            theme="blue"
+            labelColor="text-white"
+            @onSelectChange="mediaTypeChange"
+          />
+
+          <SelectMedia
+            v-model:formControlName="filter.media"
+            theme="blue"
+            labelColor="text-white"
+          />
+
+          <SelectStation
+            v-model:formControlName="filter.station"
+            theme="blue"
+            labelColor="text-white"
+          />
+        </div>
       </div>
     </div>
     <div
       class="absolute bottom-7 w-full bg-blueSide px-8 pb-3 border-t border-inputBlue"
     >
-      <ButtonComponent vClass="btn-amber py-2 w-full mt-3"
+      <ButtonComponent @click="onClickApply" vClass="btn-amber py-2 w-full mt-3"
         >Apply</ButtonComponent
       >
     </div>
@@ -86,9 +86,14 @@ import SidebarRight from "@/components/SidebarRight.vue";
 import TextIconGroup from "@/components/TextIconGroup.vue";
 import SelectSearchLabel from "@/components/SelectSearchWithLabel.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
-import InputDate from "@/components/InputDate.vue";
-import { ref } from "@vue/reactivity";
-import { onClickOutside } from "@vueuse/core";
+import { reactive, ref } from "@vue/reactivity";
+import { useDeviceStore, useMediaStore } from "@/store";
+import { storeToRefs } from "pinia";
+import SelectMediaType from "@/components/SelectMediaType.vue";
+import SelectDeviceGroup from "@/components/SelectDeviceGroup.vue";
+import SelectMedia from "@/components/SelectMedia.vue";
+import SelectStation from "@/components/SelectStation.vue";
+import Datepicker from "@vuepic/vue-datepicker";
 
 export default {
   components: {
@@ -96,11 +101,17 @@ export default {
     TextIconGroup,
     ButtonComponent,
     SelectSearchLabel,
-    InputDate,
+    SelectMediaType,
+    SelectDeviceGroup,
+    SelectMedia,
+    SelectStation,
+    Datepicker,
   },
   setup() {
-    const target = ref(null);
-    // const isOverflow = ref(true);
+    const deviceStore = useDeviceStore();
+    const mediaStore = useMediaStore();
+    const { dataByGroup } = storeToRefs(deviceStore);
+    const date = ref("");
 
     const searchResults = [
       {
@@ -137,17 +148,65 @@ export default {
       },
     ];
     const valueSearch = ref("");
-
-    onClickOutside(target, (event) => {
-      if (event) {
-        console.log("oke");
-      }
+    const filter = reactive({
+      deviceGroupId: "",
+      deviceId: "",
+      mediaType: "",
+      station: "",
+      media: "",
     });
+
+    const change = (value) => {
+      filter.deviceId = "";
+      if (value != "") {
+        deviceStore.deviceByGroup(value);
+      } else {
+        deviceStore.$reset();
+      }
+    };
+
+    const mediaTypeChange = (value) => {
+      filter.mediaType = "";
+      mediaStore.getAll({ limit: 9999, type: value });
+    };
+
+    const onClickApply = () => {
+      console.log(filter);
+    };
+
+    const format = (datePick) => {
+      const date = datePick[0];
+      const date2 = datePick[1];
+      let value = "";
+
+      if (date) {
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+
+        value = value.concat(`${day}/${month}/${year}`);
+      }
+
+      if (date2) {
+        const day2 = date2.getDate();
+        const month2 = date2.getMonth() + 1;
+        const year2 = date2.getFullYear();
+        value = value.concat(` - ${day2}/${month2}/${year2}`);
+      }
+
+      return value;
+    };
 
     return {
       searchResults,
       valueSearch,
-      target,
+      filter,
+      change,
+      format,
+      date,
+      dataByGroup,
+      onClickApply,
+      mediaTypeChange,
     };
   },
 };

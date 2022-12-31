@@ -9,3 +9,4 @@ export * from "./playlistDetail.store";
 export * from "./scroll.store";
 export * from "./modal.store";
 export * from "./displaylog.store";
+export * from "./media.store";

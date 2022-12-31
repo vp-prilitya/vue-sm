@@ -102,10 +102,6 @@
       :message="result.error.response.data.message"
     />
   </div>
-
-  <!-- <div class="py-4 flex justify-center">
-    <ButtonComponent>Load more</ButtonComponent>
-  </div> -->
 </template>
 
 <script>

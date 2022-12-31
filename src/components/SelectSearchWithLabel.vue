@@ -10,19 +10,24 @@
       :data="data"
       :optionsValue="optionsValue"
       :optionsKey="optionsKey"
-      :formControlName="formControlName"
+      v-model:formControlName="formName"
       :placeholder="placeholder"
+      :loading="loading"
+      @onSelectChange="changeData"
+      :theme="theme"
     />
   </div>
 </template>
 
 <script>
 import SelectSearch from "./SelectSearch.vue";
+import { computed } from "@vue/runtime-core";
 
 export default {
   components: {
     SelectSearch,
   },
+
   props: {
     labelColor: {
       type: String,
@@ -44,6 +49,29 @@ export default {
     },
     optionsKey: String,
     formControlName: [String, Number],
+    loading: Boolean,
+    theme: {
+      type: String,
+    },
+  },
+  setup(props, { emit }) {
+    const formName = computed({
+      get() {
+        return props.formControlName;
+      },
+      set(value) {
+        emit("update:formControlName", value);
+      },
+    });
+
+    const changeData = (value) => {
+      emit("onSelectChange", value);
+    };
+
+    return {
+      formName,
+      changeData,
+    };
   },
 };
 </script>

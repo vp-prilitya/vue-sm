@@ -3,46 +3,36 @@ import { defineStore } from "pinia";
 import debounce from "debounce-promise";
 import { useScrollStore } from "./scroll.store";
 
-let debouncedFetch = debounce(getData, 0);
+let debouncedFetch = debounce(getData, 500);
 
-export const useDeviceStore = defineStore({
-  id: "device",
+export const useMediaStore = defineStore({
+  id: "media",
   state: () => ({
     result: {
       count: 0,
     },
-    q: "all",
-    dataByGroup: {},
   }),
   getters: {
-    getData(state) {
-      return state.result;
-    },
-    getQuery(state) {
-      return state.q;
+    getDataResult(state) {
+      return state.result.data;
     },
   },
   actions: {
-    async deviceGetAll(params) {
+    async getAll(params) {
       if (!params.loadmore) {
         this.result = { loading: true };
       } else {
         this.result = { loading: true, ...this.result };
       }
 
-      this.q = !params.q ? "all" : params?.q;
-
       const Dataparams = {
         limit: params?.limit || 10,
         offset: params?.offset || 0,
-        order: params?.order || "deviceid",
-        ordertype: params?.orderType || "desc",
-        isactive: params?.isactive || 1,
-        q: params?.q,
+        type: params?.type,
       };
 
       try {
-        const data = await debouncedFetch("device", Dataparams);
+        const data = await debouncedFetch("media", Dataparams);
 
         if (!params.loadmore) {
           this.result = { ...data.data };
@@ -61,22 +51,6 @@ export const useDeviceStore = defineStore({
         if (!params.loadmore) {
           this.result = { error };
         }
-      }
-    },
-    async deviceByGroup(groupId) {
-      this.dataByGroup = { loading: true };
-
-      const Dataparams = {
-        limit: 9999,
-        devicegroup: groupId,
-      };
-
-      try {
-        const data = await debouncedFetch("device/group", Dataparams);
-
-        this.dataByGroup = { data: data.data };
-      } catch (error) {
-        this.dataByGroup = { error };
       }
     },
   },
