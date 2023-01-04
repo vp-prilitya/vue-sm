@@ -134,14 +134,20 @@ export default {
     const { data, optionsValue, optionsKey, formControlName } = toRefs(props);
 
     onMounted(() => {
+      // data.value.forEach((db) => {
+      //   if (db[optionsKey.value] == formControlName.value) {
+      //     value.value = db[optionsValue.value];
+      //   }
+      // });
+    });
+
+    watchEffect(() => {
       data.value.forEach((db) => {
         if (db[optionsKey.value] == formControlName.value) {
           value.value = db[optionsValue.value];
         }
       });
-    });
 
-    watchEffect(() => {
       if (formControlName.value == "") {
         value.value = "";
       }

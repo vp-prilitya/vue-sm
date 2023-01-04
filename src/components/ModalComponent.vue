@@ -45,13 +45,12 @@
           <div
             class="flex justify-end items-center p-6 space-x-2 rounded-b border-t border-gray-200"
           >
-            <button-component-vue> Accept </button-component-vue>
+            <button-component-vue :vClass="colorAccept">
+              {{ titleAccept }}
+            </button-component-vue>
 
-            <ButtonComponentVue
-              @click="modal.closeModal"
-              vClass="text-gray-600 bg-white hover:bg-gray-100 border border-gray-200 hover:text-gray-900"
-            >
-              Close
+            <ButtonComponentVue @click="modal.closeModal" :vClass="colorClose">
+              {{ titleClose }}
             </ButtonComponentVue>
           </div>
         </div>
@@ -72,6 +71,19 @@ export default {
     widthMax: {
       type: String,
       default: "max-w-md",
+    },
+    titleAccept: {
+      type: String,
+      default: "Accept",
+    },
+    titleClose: {
+      type: String,
+      default: "Close",
+    },
+    colorAccept: String,
+    colorClose: {
+      type: String,
+      default: "btn-white",
     },
   },
   setup() {

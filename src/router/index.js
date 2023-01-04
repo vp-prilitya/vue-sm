@@ -9,6 +9,8 @@ import SlotArrival from "../views/slot/SlotArrival.vue";
 import SlotDeparture from "../views/slot/SlotDeparture.vue";
 import SlotInformationSvg from "@/components/SlotInformationSvg.vue";
 import DisplayLog from "../views/displayLog/DisplayLog.vue";
+import Segment from "../views/segment/SegmentView.vue";
+import SegmentDetail from "../views/segment-detail/SegmentDetailView.vue";
 
 import {
   useAuthStore,
@@ -77,6 +79,22 @@ const routes = [
         path: "/display-log",
         name: "display-log",
         component: DisplayLog,
+      },
+      {
+        path: "/segment",
+        name: "segement",
+        children: [
+          {
+            path: "",
+            name: "segment",
+            component: Segment,
+          },
+          {
+            path: ":id",
+            name: "segment-detail",
+            component: SegmentDetail,
+          },
+        ],
       },
     ],
   },

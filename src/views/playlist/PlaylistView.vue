@@ -1,50 +1,45 @@
 <template>
-  <div class="flex w-full">
-    <div class="main">
-      <header-title title="Playlist">
-        <icon-playlist color="fill-primary" />
-      </header-title>
-      <main-content>
-        <menu-componet
-          :arrivalLink="'slot'"
-          :centerLink="'slot'"
-          :departurerLink="'slot'"
+  <div class="main">
+    <header-title title="Playlist">
+      <icon-playlist color="fill-primary" />
+    </header-title>
+    <main-content>
+      <menu-componet
+        :arrivalLink="'slot'"
+        :centerLink="'slot'"
+        :departurerLink="'slot'"
+      />
+      <div class="pt-5 grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-5 pb-5">
+        <card-playlist
+          v-show="result.data?.length"
+          v-for="db in result.data"
+          @click="onClick(db)"
+          :key="db.playlistid"
+          :playlistname="db.playlistname"
+          :description="db.description"
+          :totalMedia="db.total_media"
+          :totalTime="db.total_time"
         />
-        <div
-          class="pt-5 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-5 pb-5"
-          :class="open ? 'lg:grid-cols-2' : 'lg:grid-cols-3 '"
-        >
-          <card-playlist
-            v-show="result.data?.length"
-            v-for="db in result.data"
-            @click="onClick(db)"
-            :key="db.playlistid"
-            :playlistname="db.playlistname"
-            :description="db.description"
-            :totalMedia="db.total_media"
-            :totalTime="db.total_time"
-          />
 
-          <skeleton-component
-            v-show="result.loading"
-            height="h-64"
-            v-for="index in 3"
-            :key="index"
-          />
+        <skeleton-component
+          v-show="result.loading"
+          height="h-64"
+          v-for="index in 3"
+          :key="index"
+        />
 
-          <alert-error-component
-            v-if="result.error"
-            :message="result.error.response.data.message"
-          />
-        </div>
+        <alert-error-component
+          v-if="result.error"
+          :message="result.error.response.data.message"
+        />
+      </div>
 
-        <div v-if="result.data?.length == 0" class="flex justify-center pb-8">
-          <no-data :size="'w-[30rem]'" />
-        </div>
-      </main-content>
-    </div>
-    <media-playlist></media-playlist>
+      <div v-if="result.data?.length == 0" class="flex justify-center pb-8">
+        <no-data :size="'w-[30rem]'" />
+      </div>
+    </main-content>
   </div>
+  <media-playlist />
 </template>
 
 <script>

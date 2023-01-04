@@ -28,7 +28,8 @@
           ></path>
         </svg>
       </div>
-      <slot v-if="open" />
+      <slot v-if="open"> </slot>
+
       <div
         v-if="open"
         class="absolute w-full bg-primary bottom-0 pb-[5px] px-2 items-center space-x-1 border-t border-blue-900"

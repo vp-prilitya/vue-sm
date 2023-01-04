@@ -22,6 +22,7 @@ module.exports = {
       contentColor: "#E7E7E9",
       btnGray: "#C6C4C2",
       inputBlue: "#39497a",
+      bgGray: "#D9D9D9",
     },
 
     extend: {

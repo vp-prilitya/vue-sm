@@ -12,6 +12,9 @@ export const useDisplayLogStore = defineStore({
     result: {
       count: 0,
     },
+    dateFilter: `${moment(new Date()).format("DD MMM YYYY")} - ${moment(
+      new Date()
+    ).format("DD MMM YYYY")}`,
   }),
   getters: {
     getDataResult(state) {
@@ -28,20 +31,21 @@ export const useDisplayLogStore = defineStore({
 
       const dateNow = moment(new Date()).format("YYYY-MM-DD");
 
-      const Dataparams = {
+      const dataparams = {
         limit: params?.limit || 40,
         offset: params?.offset || 0,
         deviceid: params?.deviceid,
         mediaid: params?.mediaid,
         devicegroup: params?.devicegroup,
         mediatype: params?.mediatype,
+        station: params?.station,
         datestart: params?.datestart || dateNow,
         dateend: params?.dateend || dateNow,
         q: params?.q,
       };
 
       try {
-        const data = await debouncedFetch("displaylog", Dataparams);
+        const data = await debouncedFetch("displaylog", dataparams);
 
         if (!params.loadmore) {
           this.result = { ...data.data };

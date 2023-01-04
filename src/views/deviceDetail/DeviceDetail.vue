@@ -1,54 +1,50 @@
 <template>
-  <div class="flex">
-    <div class="main">
-      <header-title title="Device Detail">
-        <icon-device color="fill-primary" />
-      </header-title>
-      <main-content>
-        <div class="flex flex-col md:flex-row pt-5">
-          <div class="basis-11/12">
-            <CardDevice
-              :deviceid="'GA-A1'"
-              :groupname="'KRL-JR105'"
-              :firmware="'v1.1.0'"
-              :hdcapacity="32"
-              :blueCard="true"
-              @click="clickInfo"
-            />
-          </div>
-          <div class="basis-full md:pl-8 justify-between">
-            <div class="flex flex-col justify-between h-full">
-              <div>
-                <h1 class="text-lg pb-1">Volume</h1>
-                <div class="mb-4 w-full h-4 bg-gray-400 rounded-full">
-                  <div
-                    class="h-4 bg-red-500 rounded-full"
-                    style="width: 45%"
-                  ></div>
-                </div>
+  <div class="main">
+    <header-title title="Device Detail">
+      <icon-device color="fill-primary" />
+    </header-title>
+    <main-content>
+      <div class="flex flex-col md:flex-row pt-5">
+        <div class="basis-11/12">
+          <CardDevice
+            :deviceid="'GA-A1'"
+            :groupname="'KRL-JR105'"
+            :firmware="'v1.1.0'"
+            :hdcapacity="32"
+            :blueCard="true"
+            @click="clickInfo"
+          />
+        </div>
+        <div class="basis-full md:pl-8 justify-between">
+          <div class="flex flex-col justify-between h-full">
+            <div>
+              <h1 class="text-lg pb-1">Volume</h1>
+              <div class="mb-4 w-full h-4 bg-gray-400 rounded-full">
+                <div
+                  class="h-4 bg-red-500 rounded-full"
+                  style="width: 45%"
+                ></div>
               </div>
-              <div class="flex space-x-3">
-                <button-component vClass="btn-gray w-full text-md text-primary">
-                  <icon-schedule />
-                  Schedule
-                </button-component>
-                <button-component
-                  vClass="btn-gray w-full  text-md text-primary "
-                >
-                  <icon-playlist color="fill-blueSide" />
-                  Playlist
-                </button-component>
-              </div>
+            </div>
+            <div class="flex space-x-3">
+              <button-component vClass="btn-gray w-full text-md text-primary">
+                <icon-schedule />
+                Schedule
+              </button-component>
+              <button-component vClass="btn-gray w-full  text-md text-primary ">
+                <icon-playlist color="fill-blueSide" />
+                Playlist
+              </button-component>
             </div>
           </div>
         </div>
-        <div class="flex justify-center pt-14">
-          <device-information />
-        </div>
-      </main-content>
-    </div>
-    <device-info> </device-info>
+      </div>
+      <div class="flex justify-center pt-14">
+        <device-information />
+      </div>
+    </main-content>
   </div>
+  <device-info> </device-info>
 </template>
 
 <script>

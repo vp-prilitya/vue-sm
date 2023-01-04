@@ -18,12 +18,24 @@
   @apply bg-blue-800 hover:bg-blue-900 focus:ring-blue-300;
 }
 
+.btn-red {
+  @apply bg-red-800 hover:bg-red-900 focus:ring-red-300;
+}
+
+.btn-green {
+  @apply bg-green-800 hover:bg-green-900 focus:ring-green-300;
+}
+
 .btn-amber {
   @apply bg-amber hover:bg-amber500 focus:bg-amber400;
 }
 
+.btn-white {
+  @apply text-gray-600 bg-white hover:bg-gray-100 border border-gray-200 hover:text-gray-900;
+}
+
 .input-default {
-  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg transition duration-300 block w-full py-2.5 pr-8 pl-4;
+  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg transition duration-300 block w-full py-2.5 pr-8;
 }
 
 .input-blue {

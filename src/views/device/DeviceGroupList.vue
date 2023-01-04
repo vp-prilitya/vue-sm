@@ -5,6 +5,7 @@
       <div class="flex space-x-3">
         <icon-search />
         <icon-file-add @click="modal.showModal" :addClass="'cursor-pointer'" />
+        <AddDeviceGroup />
       </div>
     </div>
     <div class="overflow-y-auto h-128">
@@ -57,6 +58,7 @@ import DeviceGroupListSkeleton from "./DeviceGroupListSkeleton.vue";
 import { useDeviceGroupStore, useDeviceStore, useModalStore } from "@/store";
 import { onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
+import AddDeviceGroup from "./AddDeviceGroup.vue";
 
 export default {
   components: {
@@ -66,6 +68,7 @@ export default {
     DeviceGroupListSkeleton,
     AlertErrorComponent,
     NoData,
+    AddDeviceGroup,
   },
   setup() {
     const deviceGroupStore = useDeviceGroupStore();

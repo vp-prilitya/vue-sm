@@ -23,7 +23,7 @@
           </svg>
         </tittle-betweent>
       </div>
-      <div @scroll="scrolling" class="overflow-auto h-80">
+      <div @scroll="scrolling" class="overflow-auto max-h-[55vh]">
         <div class="px-8 space-y-4">
           <title-sub-icon
             v-for="db in result.data"
