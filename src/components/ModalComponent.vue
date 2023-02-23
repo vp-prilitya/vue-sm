@@ -1,7 +1,7 @@
 <template>
   <teleport to="#modal">
     <div
-      v-if="modal.getOpen"
+      v-if="modal.getOpen && modal.id == id"
       aria-hidden="true"
       class="overflow-y-auto overflow-x-hidden flex backdrop-blur-sm bg-primary bg-opacity-30 items-center justify-center fixed top-0 right-0 left-0 z-50 p-4 w-full md:inset-0 h-modal md:h-full"
     >
@@ -34,7 +34,7 @@
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span class="sr-only">Close modal</span>
+              <span class="sr-only">{{ modal.id }}Close modal</span>
             </button>
           </div>
           <!-- Modal body -->
@@ -84,6 +84,10 @@ export default {
     colorClose: {
       type: String,
       default: "btn-white",
+    },
+    id: {
+      type: Number,
+      default: 0,
     },
   },
   setup() {

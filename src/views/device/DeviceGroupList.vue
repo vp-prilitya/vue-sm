@@ -4,8 +4,11 @@
       <h1 class="text-xl text-primary font-bold">Device Group</h1>
       <div class="flex space-x-3">
         <icon-search />
-        <icon-file-add @click="modal.showModal" :addClass="'cursor-pointer'" />
-        <AddDeviceGroup />
+        <icon-file-add
+          @click="modal.showModal(1)"
+          :addClass="'cursor-pointer'"
+        />
+        <AddDeviceGroup :id="1" />
       </div>
     </div>
     <div class="overflow-y-auto h-128">

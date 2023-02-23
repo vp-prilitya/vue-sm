@@ -4,6 +4,7 @@ export const useModalStore = defineStore({
   id: "modal",
   state: () => ({
     open: false,
+    id: 0,
   }),
   getters: {
     getOpen(state) {
@@ -11,7 +12,8 @@ export const useModalStore = defineStore({
     },
   },
   actions: {
-    showModal() {
+    showModal(id = 0) {
+      this.id = id;
       this.open = true;
     },
     closeModal() {
