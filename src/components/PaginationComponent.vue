@@ -77,14 +77,31 @@
 </template>
 
 <script>
+import { toRefs } from "vue";
+
 export default {
   props: {
-    number: Number,
-    page: Number,
-    length: Number,
-    showInfo: Boolean,
+    size: Number,
+    number: {
+      default: 0,
+      type: Number,
+    },
+    page: {
+      default: 0,
+      required: true,
+    },
+    length: {
+      default: 0,
+      required: true,
+    },
+    showInfo: {
+      default: true,
+    },
   },
-  setup(props) {
+  setup(props, { emit }) {
+    const math = Math;
+    const { size, page, length } = toRefs(props);
+
     function pagination(c, m) {
       var current = c,
         last = m,
@@ -117,24 +134,24 @@ export default {
     }
 
     function changePage(item) {
-      //   this.page = 2;
-      this.select.emit(item);
+      emit("update:page", item);
+      emit("onSelectChange", item);
     }
 
     function showPage() {
       let number = 0;
-      if (props.length > 0) {
-        number = (props.page - 1) * props.size + 1;
+      if (length.value > 0) {
+        number = (page.value - 1) * size.value + 1;
       }
       return number;
     }
 
     function showTotal() {
       let total = 0;
-      if (props.length > 0) {
-        total = this.page * this.size;
-        if (total > this.length) {
-          total = this.length;
+      if (length.length > 0) {
+        total = page.value * size.value;
+        if (total > length.value) {
+          total = length.value;
         }
       }
 
@@ -146,6 +163,7 @@ export default {
       showTotal,
       showPage,
       changePage,
+      math,
     };
   },
 };
